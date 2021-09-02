@@ -38,8 +38,9 @@ const App = () => {
       //if successfull add to state
       setItems([res.data, ...items]);
     } catch (err) {
-      alert("failed to create");
+      // alert("failed to create");
       console.log(err);
+      console.log(err.response.data.errors);
     }
   };
   return (
