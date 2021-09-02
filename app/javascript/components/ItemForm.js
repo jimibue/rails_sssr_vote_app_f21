@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Error from "./Error";
 
 const ItemForm = (props) => {
   const [name, setName] = useState(props.name ? props.name : "");
@@ -14,6 +15,7 @@ const ItemForm = (props) => {
   return (
     <div style={{ margin: "10px", border: "3px solid pink" }}>
       <h1>Item Form</h1>
+      {props.error && <Error error={props.error} />}
       <form onSubmit={handleSubmit}>
         <p>name</p>
         <input

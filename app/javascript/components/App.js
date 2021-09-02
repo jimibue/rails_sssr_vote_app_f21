@@ -52,7 +52,7 @@ const App = () => {
         {showForm ? "hide form" : "new item form"}
       </button>
       <br />
-      {showForm && <ItemForm addItemProp={addItem} />}
+      {showForm && <ItemForm error={errors} addItemProp={addItem} />}
       <button onClick={getItems}>get Items</button>
 
       <Items items={items} deleteItem={deleteItem} />
