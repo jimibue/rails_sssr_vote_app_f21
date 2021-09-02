@@ -29,6 +29,27 @@ const App = () => {
       console.log(err);
     }
   };
+  const updateItem = async (item) => {
+    console.log(item);
+    try {
+      let res = await axios.put(`/items/${item.id}`, item);
+      let newItems = items.map((i) => (i.id === item.id ? item : i));
+      setItems(newItems);
+      // here is where I want to close the edit
+    } catch (err) {
+      alert("err");
+    }
+  };
+
+  const like = async (id) => {
+    console.log(id);
+    try {
+      // I need api call...
+      let res = await axios.put(`/items/${id}/like`);
+      let newItems = items.map((i) => (i.id === id ? res.data : i));
+      setItems(newItems);
+    } catch (err) {}
+  };
 
   const addItem = async (item) => {
     console.log(item);
@@ -55,7 +76,12 @@ const App = () => {
       {showForm && <ItemForm error={errors} addItemProp={addItem} />}
       <button onClick={getItems}>get Items</button>
 
-      <Items items={items} deleteItem={deleteItem} />
+      <Items
+        items={items}
+        deleteItem={deleteItem}
+        updateItem={updateItem}
+        like={like}
+      />
     </div>
   );
 };

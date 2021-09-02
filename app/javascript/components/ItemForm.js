@@ -9,8 +9,15 @@ const ItemForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addItemProp({ name, category });
-    setName("");
+    if (props.id) {
+      props.updateItem({ id: props.id, name, category });
+    } else {
+      props.addItemProp({ name, category });
+    }
+    if (!props.error) {
+      setName("");
+      setCategory("");
+    }
   };
   return (
     <div style={{ margin: "10px", border: "3px solid pink" }}>

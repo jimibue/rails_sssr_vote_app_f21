@@ -21,6 +21,23 @@ class ItemsController < ApplicationController
     end
   end
 
+  def update
+    @item = Item.find(params[:id])
+    if(@item.update(items_params))
+      render json: @item
+    else
+      # this will cause a 422 error
+      render json: {errors: item.errors, look:'Hello'}, status: :unprocessable_entity
+    end
+  end
+
+  def like
+    @item = Item.find(params[:id])
+    @item.likes+= 1
+    @item.save
+    render json: @item
+  end
+
   def destroy
     @item = Item.find(params[:id])
     render json: @item.destroy
