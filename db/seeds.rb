@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require "faker"
 
-catagories = ["food", "travel", "misc"]
+catagories = ["javascript", "ruby", "react"]
 
 10.times do |i|
   Item.create(

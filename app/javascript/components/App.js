@@ -5,7 +5,8 @@ import Items from "./Items";
 
 const App = () => {
   const [items, setItems] = useState([]);
-  const [showForm, setShowForm] = useState(false);
+  const [errors, setErrors] = useState(null);
+  const [showForm, setShowForm] = useState(true);
 
   const getItems = async () => {
     // does this chucnk of code and if fails goes to catch block
@@ -31,16 +32,17 @@ const App = () => {
 
   const addItem = async (item) => {
     console.log(item);
+
     try {
+      // reset any errors if there was one
+      setErrors(null);
       // add to datatbase
       let res = await axios.post("/items", item);
       console.log(res);
       //if successfull add to state
       setItems([res.data, ...items]);
     } catch (err) {
-      // alert("failed to create");
-      console.log(err);
-      console.log(err.response.data.errors);
+      setErrors(err.response.data.errors);
     }
   };
   return (
